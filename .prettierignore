@@ -1,0 +1,10 @@
+# Ignore artifacts:
+build
+coverage
+.vscode-test/
+out/
+dist/
+test-fixtures/
+node_modules/**
+*.json
+vite.config.ts
