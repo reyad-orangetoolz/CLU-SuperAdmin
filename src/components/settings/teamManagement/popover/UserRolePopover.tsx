@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
     AddIcon,
@@ -13,15 +13,40 @@ import {
     Popover,
     Stack,
 } from 'convertupleads-theme';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../../state/store';
+import { attemptCreateRoleOpen } from '../../../../state/features/settings/teamMember/teamSlice';
+import { USERS } from '../TeamManagementTable';
 
 interface Props {
     id: string | undefined;
     open: boolean;
     status: HTMLSpanElement | SVGSVGElement | null;
     onClose: () => void;
+    rowId: number;
+    rowRole: number;
 }
 
-const UserRolePopover: React.FC<Props> = ({ id, open, status, onClose }) => {
+const UserRolePopover: React.FC<Props> = ({ id, open, status, onClose, rowId, rowRole }) => {
+    const [check, setCheck] = useState<number | null>(rowRole);
+    const dispatch = useDispatch<AppDispatch>();
+
+
+    const handleCreateRoleDrawer = () => {
+        dispatch(attemptCreateRoleOpen());
+        onClose();
+    };
+
+    const handleRole = (rowId: number, role: number) => {
+        setCheck(role);
+        USERS.map((user) => {
+            if (user.id === rowId) {
+                user.role = role;
+            }
+        })
+        onClose();
+    }
+
     return (
         <Popover
             id={id}
@@ -48,17 +73,17 @@ const UserRolePopover: React.FC<Props> = ({ id, open, status, onClose }) => {
         >
             <Paper sx={{ width: 189 }}>
                 <List>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding secondaryAction={check == 1 && <CheckIcon sx={{ fontSize: 20 }} color='primary' />} onClick={() => handleRole(rowId, 1)}>
                         <ListItemButton>
                             <ListItemText primary='Admin' />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding>
+                    <ListItem disablePadding secondaryAction={check == 2 && <CheckIcon sx={{ fontSize: 20 }} color='primary' />} onClick={() => handleRole(rowId, 2)}>
                         <ListItemButton>
                             <ListItemText primary='Customer support' />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding secondaryAction={<CheckIcon sx={{ fontSize: 20 }} color='primary' />}>
+                    <ListItem disablePadding secondaryAction={check == 3 && <CheckIcon sx={{ fontSize: 20 }} color='primary' />} onClick={() => handleRole(rowId, 3)}>
                         <ListItemButton>
                             <ListItemText primary='Developer ' />
                         </ListItemButton>
@@ -67,7 +92,7 @@ const UserRolePopover: React.FC<Props> = ({ id, open, status, onClose }) => {
 
                 <Divider light />
                 <Stack p={1}>
-                    <Button variant='text' startIcon={<AddIcon />} fullWidth>
+                    <Button variant='text' startIcon={<AddIcon />} fullWidth onClick={handleCreateRoleDrawer}>
                         Create Role
                     </Button>
                 </Stack>

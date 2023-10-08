@@ -36,8 +36,6 @@ interface Props {
 const EachMember: React.FC<Props> = ({ item, rowId }) => {
     const { userName, email, phone, role, status, lastActivity } = item || {};
 
-    const [userRole, setUserRole] = React.useState(role);
-
     const [editMemberDrawer, setEditMemberDrawer] = React.useState(false);
     const handleEditMemberDrawer = () => setEditMemberDrawer((prevState) => !prevState);
 
@@ -45,10 +43,17 @@ const EachMember: React.FC<Props> = ({ item, rowId }) => {
     const handleOpenDeleteModal = () => setOpenDeleteModal((prevState) => !prevState);
 
     const getUserRole = () => {
-        switch (userRole) {
+        switch (role) {
             case USER_ROLE.OWNER:
                 return (
-                    <Button variant='tonal' rounded sx={{ py: 0, fontSize: 12 }} color='primary'>
+                    <Button
+                        variant='tonal'
+                        rounded
+                        sx={{ py: 0, fontSize: 12 }}
+                        color='primary'
+                        endIcon={<ArrowDropDownFilledIcon />}
+                        onClick={handleUserRolePopover}
+                    >
                         OWNER
                     </Button>
                 );
@@ -68,7 +73,14 @@ const EachMember: React.FC<Props> = ({ item, rowId }) => {
                 );
             case USER_ROLE.CUSTOMER_SUPPORT:
                 return (
-                    <Button variant='tonal' rounded sx={{ py: 0, fontSize: 12 }} color='secondary' endIcon={<ArrowDropDownFilledIcon />}>
+                    <Button
+                        variant='tonal'
+                        rounded
+                        sx={{ py: 0, fontSize: 12 }}
+                        color='secondary'
+                        endIcon={<ArrowDropDownFilledIcon />}
+                        onClick={handleUserRolePopover}
+                    >
                         CUSTOMER SUPPORT
                     </Button>
                 );
@@ -116,7 +128,7 @@ const EachMember: React.FC<Props> = ({ item, rowId }) => {
                         color='inherit'
                         onClick={handleUserStatusPopover}
                     >
-                        Deactivate
+                        DEACTIVE
                     </Button>
                 );
 
@@ -201,7 +213,7 @@ const EachMember: React.FC<Props> = ({ item, rowId }) => {
 
             <EditMemberDrawer open={editMemberDrawer} onClose={handleEditMemberDrawer} />
 
-            <UserRolePopover id={userRolePopoverId} open={openUserRolePopover} status={userRolePopover} onClose={handleClose} />
+            <UserRolePopover id={userRolePopoverId} open={openUserRolePopover} status={userRolePopover} onClose={handleClose} rowId={rowId} rowRole={role} />
 
             <UserStatusPopover id={userStatusPopoverId} open={openUserStatusPopover} status={userStatusPopover} onClose={handleClose} rowId={rowId} rowStatus={status} />
         </TableRow>

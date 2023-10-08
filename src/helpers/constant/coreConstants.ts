@@ -33,8 +33,8 @@ export const SELECT_INPUT_DATA = [
 
 export const USER_ROLE = {
     OWNER: 1,
-    DEVELOPER: 2,
-    CUSTOMER_SUPPORT: 3,
+    CUSTOMER_SUPPORT: 2,
+    DEVELOPER: 3,
 };
 
 export const USER_STATUS = {

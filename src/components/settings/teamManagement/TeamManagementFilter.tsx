@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { Button, Divider, FilterIcon, InputAdornment, SearchIcon, Stack, TextField } from 'convertupleads-theme';
 
 const TeamManagementFilter: React.FC = () => {
+    const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value.trim());
+    }
     return (
         <>
             <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'} p={2}>
@@ -14,6 +17,7 @@ const TeamManagementFilter: React.FC = () => {
                             </InputAdornment>
                         ),
                     }}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleSearch(e)}
                     size='small'
                 />
 

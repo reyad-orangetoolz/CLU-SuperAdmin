@@ -9,6 +9,5 @@ export const creditSettingsPattern = {
             value: 50,
             message: 'Credit cost must be less than 30!',
         },
-        setValueAs: (v: string) => (v ? v.trim() : ''),
     },
 };

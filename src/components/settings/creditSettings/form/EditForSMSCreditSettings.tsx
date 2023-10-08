@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormHelperText, InputAdornment, Stack, TextField, ErrorFilledIcon } from 'convertupleads-theme';
+import { Box, Button, FormControl, FormHelperText, Stack, TextField } from 'convertupleads-theme';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { creditSettingsPattern } from '../../../../helpers/validation/creditSettingsPattern';
 
