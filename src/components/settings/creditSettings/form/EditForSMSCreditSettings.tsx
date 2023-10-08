@@ -1,5 +1,6 @@
-import { Box, Button, FormControl, FormHelperText, Stack, TextField } from 'convertupleads-theme';
+import { Box, Button, FormControl, FormHelperText, InputAdornment, Stack, TextField, ErrorFilledIcon } from 'convertupleads-theme';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { creditSettingsPattern } from '../../../../helpers/validation/creditSettingsPattern';
 
 interface FormValues {
     cost: number;
@@ -28,6 +29,7 @@ const EditForSMSCreditSettings = () => {
             <Controller
                 control={control}
                 name="cost"
+                rules={creditSettingsPattern.cost}
                 render={({ field: { value, onChange }, fieldState: { invalid, error } }) => (
                     <FormControl size="small" sx={{ mb: 2 }} fullWidth error={!!(invalid && error?.message)}>
                         <TextField

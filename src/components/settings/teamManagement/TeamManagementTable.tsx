@@ -25,7 +25,7 @@ const StyledTableCell = styled(TableCell)((/* { theme } */) => ({
     },
 }));
 
-const USERS = [
+export const USERS = [
     {
         id: 1,
         userName: 'Lorem ipsum',
@@ -67,7 +67,7 @@ const TeamManagementTable: React.FC = () => {
                                     <Typography variant={'overline'} color={'text.tertiary'}>
                                         Username
                                     </Typography>
-                                    <IconButton onClick={() => {}} size='small'>
+                                    <IconButton onClick={() => { }} size='small'>
                                         <ChevronUpDownIcon fontSize={'small'} />
                                     </IconButton>
                                 </Stack>
@@ -77,7 +77,7 @@ const TeamManagementTable: React.FC = () => {
                                     <Typography variant={'overline'} color={'text.tertiary'}>
                                         Email & Phone
                                     </Typography>
-                                    <IconButton onClick={() => {}} size='small'>
+                                    <IconButton onClick={() => { }} size='small'>
                                         <ChevronUpDownIcon fontSize={'small'} />
                                     </IconButton>
                                 </Stack>
@@ -87,7 +87,7 @@ const TeamManagementTable: React.FC = () => {
                                     <Typography variant={'overline'} color={'text.tertiary'}>
                                         User Role
                                     </Typography>
-                                    <IconButton onClick={() => {}} size='small'>
+                                    <IconButton onClick={() => { }} size='small'>
                                         <ChevronUpDownIcon fontSize={'small'} />
                                     </IconButton>
                                 </Stack>
@@ -97,7 +97,7 @@ const TeamManagementTable: React.FC = () => {
                                     <Typography variant={'overline'} color={'text.tertiary'}>
                                         User Status
                                     </Typography>
-                                    <IconButton onClick={() => {}} size='small'>
+                                    <IconButton onClick={() => { }} size='small'>
                                         <ChevronUpDownIcon fontSize={'small'} />
                                     </IconButton>
                                 </Stack>
@@ -107,7 +107,7 @@ const TeamManagementTable: React.FC = () => {
                                     <Typography variant={'overline'} color={'text.tertiary'}>
                                         Last Activities
                                     </Typography>
-                                    <IconButton onClick={() => {}} size='small'>
+                                    <IconButton onClick={() => { }} size='small'>
                                         <ChevronUpDownIcon fontSize={'small'} />
                                     </IconButton>
                                 </Stack>
@@ -118,7 +118,7 @@ const TeamManagementTable: React.FC = () => {
                     </TableHead>
                     <TableBody>
                         {USERS.map((user) => (
-                            <EachMember key={user.id} item={user} />
+                            <EachMember key={user.id} rowId={user.id} item={user} />
                         ))}
                     </TableBody>
                 </Table>

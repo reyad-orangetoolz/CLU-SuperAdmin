@@ -1,5 +1,6 @@
 import { Box, Button, FormControl, FormHelperText, Stack, TextField } from 'convertupleads-theme';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { creditSettingsPattern } from '../../../../helpers/validation/creditSettingsPattern';
 
 interface FormValues {
     cost: number;
@@ -29,8 +30,9 @@ const EditForMMSCreditSettings = () => {
             <Controller
                 control={control}
                 name="cost"
+                rules={creditSettingsPattern.cost}
                 render={({ field: { value, onChange }, fieldState: { invalid, error } }) => (
-                    <FormControl size="small" sx={{ mb: 2 }} fullWidth error={!!(invalid && error?.message)}>
+                    <FormControl sx={{ mb: 2 }} fullWidth error={!!(invalid && error?.message)}>
                         <TextField
                             label='Credit Cost Rate'
                             fullWidth
@@ -45,8 +47,9 @@ const EditForMMSCreditSettings = () => {
             <Controller
                 control={control}
                 name="costMedia"
+                rules={creditSettingsPattern.cost}
                 render={({ field: { value, onChange }, fieldState: { invalid, error } }) => (
-                    <FormControl size="small" sx={{ mb: 2 }} fullWidth error={!!(invalid && error?.message)}>
+                    <FormControl sx={{ mb: 2 }} fullWidth error={!!(invalid && error?.message)}>
                         <TextField
                             label='Credit Cost Rate for media file'
                             fullWidth

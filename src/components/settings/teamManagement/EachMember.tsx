@@ -22,6 +22,7 @@ import UserStatusPopover from './popover/UserStatusPopover';
 
 interface Props {
     item: {
+        id: number;
         userName: string;
         email: string;
         phone: string;
@@ -29,9 +30,10 @@ interface Props {
         status: number; // Adjust this type to match your specific status type
         lastActivity: string; // Adjust this type to match your specific date format or type
     };
+    rowId: number;
 }
 
-const EachMember: React.FC<Props> = ({ item }) => {
+const EachMember: React.FC<Props> = ({ item, rowId }) => {
     const { userName, email, phone, role, status, lastActivity } = item || {};
 
     const [userRole, setUserRole] = React.useState(role);
@@ -132,6 +134,7 @@ const EachMember: React.FC<Props> = ({ item }) => {
     const handleUserStatusPopover = (
         event: React.MouseEvent<HTMLSpanElement, MouseEvent> | React.MouseEvent<SVGSVGElement, MouseEvent>
     ) => {
+        console.log(event.currentTarget);
         setUserStatusPopover(event.currentTarget);
     };
     const handleClose = () => {
@@ -177,11 +180,11 @@ const EachMember: React.FC<Props> = ({ item }) => {
                     <IconButton size='small' onClick={handleEditMemberDrawer}>
                         <EditIcon />
                     </IconButton>
-                    <IconButton size='small' onClick={() => {}}>
+                    <IconButton size='small' onClick={() => { }}>
                         <DuplicateIcon />
                     </IconButton>
 
-                    <IconButton size='small' onClick={() => {}}>
+                    <IconButton size='small' onClick={() => { }}>
                         <LoginIcon />
                     </IconButton>
 
@@ -200,7 +203,7 @@ const EachMember: React.FC<Props> = ({ item }) => {
 
             <UserRolePopover id={userRolePopoverId} open={openUserRolePopover} status={userRolePopover} onClose={handleClose} />
 
-            <UserStatusPopover id={userStatusPopoverId} open={openUserStatusPopover} status={userStatusPopover} onClose={handleClose} />
+            <UserStatusPopover id={userStatusPopoverId} open={openUserStatusPopover} status={userStatusPopover} onClose={handleClose} rowId={rowId} rowStatus={status} />
         </TableRow>
     );
 };
